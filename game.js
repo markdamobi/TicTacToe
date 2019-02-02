@@ -12,11 +12,14 @@ function playTurnO(e) {
     play.innerHTML ='O';
     // var input = document.querySelector('this.id')
 }
-//Function that resets the board when the game is over 
-function clearBoard(squares){
+//Function that resets the board 
+function clearBoard(){
     for (let i = 0; i < squares.length; i++){
         squares[i].innerHTML = '';
     }
+}
+function checker(a,b,c){
+    
 }
 //Add event listener to each of the squares
 for (let i = 0; i < squares.length; i++) {
