@@ -1,13 +1,14 @@
 const MAX_TURNS = 9;
 //Counter to keep track of times played, so that it switches from x, and o
 let counter = 0;
+//Array that contains the position of each square 
 var pos = [];
 let squares = document.getElementsByClassName('square');
 for (let i = 1; i <= MAX_TURNS; i++) {
     pos[i] = document.querySelector('#s' + i)
 }
 
-function playTurn(e) {
+function play(e) {
     let play = document.querySelector('#' + this.id);
     //Check if the position has already been played first
     if (play.innerHTML === '' && counter !== MAX_TURNS) {
@@ -15,26 +16,26 @@ function playTurn(e) {
             play.innerHTML = 'X';
             if (checkWin()){
                 alert("Player X wins ");
+                clearBoard();
                 counter = 0;
             }
             else if (counter === 8){
                 alert("It's a draw ");
+                clearBoard();
                counter = 0;
-                
             }
             counter++;
-        
-
-
         }
         else if (!(counter % 2 === 0)) {
             play.innerHTML = 'O';
             if (checkWin()){
-               setTimeout(function(){ alert("Player O wins ") }, 1000);
+               alert("Player O wins ");
+                clearBoard();
                 counter = 0;
             }
             else if (counter === 8){
-               setTimeout(function(){ alert("It's a draw ") }, 1000);
+               alert("It's a draw ");
+               clearBoard();
                counter = 0;
                 
             }
@@ -80,6 +81,6 @@ function checkDiagonal() {
 
 //Add event listener to each of the squares
 for (let i = 0; i < squares.length; i++) {
-    squares[i].addEventListener('click', playTurn);
+    squares[i].addEventListener('click', play);
 
 }
