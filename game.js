@@ -10,14 +10,34 @@ for (let i = 1; i <= MAX_TURNS; i++) {
 function playTurn(e) {
     let play = document.querySelector('#' + this.id);
     //Check if the position has already been played first
-    if (play.innerHTML === '') {
+    if (play.innerHTML === '' && counter !== MAX_TURNS) {
         if (counter % 2 === 0) {
             play.innerHTML = 'X';
+            if (checkWin()){
+                alert("Player X wins ");
+                counter = 0;
+            }
+            else if (counter === 8){
+                alert("It's a draw ");
+               counter = 0;
+                
+            }
             counter++;
+        
+
 
         }
         else if (!(counter % 2 === 0)) {
             play.innerHTML = 'O';
+            if (checkWin()){
+               setTimeout(function(){ alert("Player O wins ") }, 1000);
+                counter = 0;
+            }
+            else if (counter === 8){
+               setTimeout(function(){ alert("It's a draw ") }, 1000);
+               counter = 0;
+                
+            }
             counter++;
 
         }
