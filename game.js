@@ -10,6 +10,10 @@ let squares = document.getElementsByClassName('square');
 for (let i = 1; i <= MAX_TURNS; i++) {
     pos[i] = document.querySelector('#s' + i)
 }
+let diag1 = [];
+diag1[0] = pos[3];
+diag1[1] = pos[5];
+diag1[2] = pos[7];
 
 function play(e) {
     let play = document.querySelector('#' + this.id);
@@ -59,6 +63,11 @@ function playAi(e) {
                 stats.innerHTML = 'Congratulations!, Player X wins';
                 isOver = true;
                 counter = 0;
+                if (checker(diag1[0].innerHTML,diag1[1].innerHTML,diag1[2].innerHTML)){
+                    diag1[0].classList.add('strikediag');
+                    diag1[1].classList.add('strikediag');
+                    diag1[2].classList.add('strikediag');
+                }
             }
             else if (counter === 8) {
                 stats.innerHTML = "It's a tie!";
