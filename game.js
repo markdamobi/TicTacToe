@@ -51,7 +51,7 @@ function play(e) {
     }
 }
 
-// /*
+//This is for playing with the AI
 function playAi(e) {
     let play = document.querySelector('#' + this.id);
     //Check if the position has already been played first
@@ -75,7 +75,6 @@ function playAi(e) {
                 counter = 0;
             }
             counter++;
-            // setTimeout(AiTurn,500);
         }
         //Check if game is over before AI plays 
         if (!isOver){
