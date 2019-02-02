@@ -1,7 +1,11 @@
 const MAX_TURNS = 9;
 //Counter to keep track of times played, so that it switches from x, and o
 let counter = 0;
-let squares = document.getElementsByClassName('square')
+var pos = [];
+let squares = document.getElementsByClassName('square');
+for (let i = 1; i <= MAX_TURNS; i++){
+    pos[i] = document.querySelector('#s' + i )
+}
 
 function playTurn(e){
     let play = document.querySelector('#' + this.id);
@@ -11,7 +15,7 @@ function playTurn(e){
 
     }
     else if (counter % 2 !== 0){
-        play.innerHTML = 'X';
+        play.innerHTML = 'O';
         counter++;
     }
 }
@@ -26,9 +30,9 @@ function checker(a,b,c){
 
 }
 function checkHorizontal(){
-    return (checker(pos[1],pos[2],pos[3]) ||
-            checker(pos[4],pos[5],pos[6])||
-            checker(pos[7],pos[8],pos[9])
+    return (checker(pos[1].innerHTML,pos[2].innerHTML,pos[3].innerHTML) ||
+            checker(pos[4].innerHTML,pos[5].innerHTML,pos[6].innerHTML)||
+            checker(pos[7].innerHTML,pos[8].innerHTML,pos[9].innerHTML)
     )
 }
 //Add event listener to each of the squares
