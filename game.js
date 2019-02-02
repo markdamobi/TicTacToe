@@ -13,12 +13,12 @@ function playTurnO(e) {
     // var input = document.querySelector('this.id')
 }
 //Function that resets the board when the game is over 
-function clearBoard(arr){
-    for (let i = 0; i < arr.length; i++){
-        arr[i] = '';
+function clearBoard(squares){
+    for (let i = 0; i < squares.length; i++){
+        squares[i].innerHTML = '';
     }
 }
-//Game Loop 
+//Add event listener to each of the squares
 for (let i = 0; i < squares.length; i++) {
     if (i % 2 == 0){
         squares[i].addEventListener('click', playTurnX);
@@ -28,4 +28,3 @@ for (let i = 0; i < squares.length; i++) {
     }
     
 }
-clearBoard(squares);
