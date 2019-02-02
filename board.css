@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Annie Use Your Telescope');
-body{
-
-    font-family:'Annie Use Your Telescope';
+body {
+    font-family: 'Annie Use Your Telescope';
     background-color: darkgrey
 }
 
@@ -21,9 +20,16 @@ td {
     text-align: center;
     font-size: 50px;
 }
-#status{
+/* for striking through diagonally, from bottom left */
+.strikediag {
+  background: linear-gradient(to left top, transparent 47.75%, currentColor 49.5%, currentColor 50.5%, transparent 52.25%);
+}
+.withpadding {
+  padding: 0 0.15em;
+}
+
+#status {
     font-size: 50px;
-    
 }
 
 .c2 {
@@ -43,7 +49,7 @@ td {
     text-align: center;
     border: none;
     background: #B8BEDD;
-    color: mediumaquamarine ;
+    color: mediumaquamarine;
     text-transform: uppercase;
     cursor: pointer;
     display: block;
@@ -52,7 +58,6 @@ td {
     padding: 0.6em 1.2em;
     letter-spacing: 1px;
 }
-
 
 #reset {
     background: #144E75;
