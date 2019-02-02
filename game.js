@@ -120,6 +120,9 @@ function clearBoard() {
     counter = 0;
     //Set status back to empty
     stats.innerHTML = '';
+    diag1[0].classList.remove('strikediag');
+    diag1[1].classList.remove('strikediag');
+    diag1[2].classList.remove('strikediag');
     //Reset isOver back to false
     isOver = false;
 }
