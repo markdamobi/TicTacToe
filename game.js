@@ -3,6 +3,7 @@ const MAX_TURNS = 9;
 let counter = 0;
 //Array that contains the position of each square 
 var pos = [];
+let stats = document.querySelector('#status');
 let squares = document.getElementsByClassName('square');
 for (let i = 1; i <= MAX_TURNS; i++) {
     pos[i] = document.querySelector('#s' + i)
@@ -11,33 +12,31 @@ for (let i = 1; i <= MAX_TURNS; i++) {
 function play(e) {
     let play = document.querySelector('#' + this.id);
     //Check if the position has already been played first
-    if (play.innerHTML === '' && counter !== MAX_TURNS) {
+    if (play.innerHTML === '' && counter !== MAX_TURNS && !checkWin()) {
         if (counter % 2 === 0) {
             play.innerHTML = 'X';
-            if (checkWin()){
-                alert("Player X wins ");
-                clearBoard();
+            stats.innerHTML = "Player O's turn";
+            if (checkWin()) {
+                stats.innerHTML = 'Congratulations!, Player X wins';
                 counter = 0;
             }
-            else if (counter === 8){
-                alert("It's a draw ");
-                clearBoard();
-               counter = 0;
+            else if (counter === 8) {
+                stats.innerHTML = "It's a tie!";
+                counter = 0;
             }
             counter++;
         }
         else if (!(counter % 2 === 0)) {
             play.innerHTML = 'O';
-            if (checkWin()){
-               alert("Player O wins ");
-                clearBoard();
+            stats.innerHTML = "Player X's turn";
+            if (checkWin()) {
+                stats.innerHTML = 'Congratulations!, Player O wins';
                 counter = 0;
             }
-            else if (counter === 8){
-               alert("It's a draw ");
-               clearBoard();
-               counter = 0;
-                
+            else if (counter === 8) {
+                stats.innerHTML = "It's a tie!";
+                counter = 0;
+
             }
             counter++;
 
@@ -45,6 +44,48 @@ function play(e) {
 
     }
 }
+
+// /*
+function playAi(e) {
+    let play = document.querySelector('#' + this.id);
+    //Check if the position has already been played first
+    if (play.innerHTML === '' && counter !== MAX_TURNS && !checkWin()) {
+        if (counter % 2 === 0) {
+            play.innerHTML = 'X';
+            stats.innerHTML = "Player O's turn";
+            if (checkWin()) {
+                stats.innerHTML = 'Congratulations!, Player X wins';
+                counter = 0;
+            }
+            else if (counter === 8) {
+                stats.innerHTML = "It's a tie!";
+                counter = 0;
+            }
+            counter++;
+        }
+        AiTurn();
+    }
+}
+function AiTurn() {
+    for (let i = 1; i < MAX_TURNS; i++) {
+        if (pos[i].innerHTML == '') {
+            pos[i].innerHTML = 'O';
+            stats.innerHTML = "Player X's turn";
+        }
+        if (checkWin()) {
+            stats.innerHTML = 'Congratulations!, Player O wins';
+            counter = 0;
+        }
+        else if (counter === 8) {
+            stats.innerHTML = "It's a tie!";
+            counter = 0;
+        }
+        counter++;
+    }
+}
+// */
+
+
 //Function that resets the board 
 function clearBoard() {
     for (let i = 0; i < squares.length; i++) {
@@ -52,6 +93,8 @@ function clearBoard() {
     }
     //Reset counter 
     counter = 0;
+    //Set status back to empty
+    stats.innerHTML = '';
 }
 function checkWin() {
     return (checkHorizontal() || checkVertical() || checkDiagonal());
@@ -81,6 +124,6 @@ function checkDiagonal() {
 
 //Add event listener to each of the squares
 for (let i = 0; i < squares.length; i++) {
-    squares[i].addEventListener('click', play);
+    squares[i].addEventListener('click', playAi);
 
 }
