@@ -63,8 +63,7 @@ function playAi(e) {
             }
             counter++;
         }
-        // setTimeout(AiTurn,500);
-        AiTurn();
+        setTimeout(AiTurn,500);
     }
 }
 function AiTurn() {
