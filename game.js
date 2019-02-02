@@ -67,20 +67,24 @@ function playAi(e) {
     }
 }
 function AiTurn() {
-    for (let i = 1; i < MAX_TURNS; i++) {
-        if (pos[i].innerHTML == '') {
-            pos[i].innerHTML = 'O';
-            stats.innerHTML = "Player X's turn";
+    if (counter % 2 !== 0) {
+        for (let i = 1; i < MAX_TURNS; i++) {
+            if (pos[i].innerHTML == '') {
+                pos[i].innerHTML = 'O';
+                stats.innerHTML = "Player X's turn";
+                if (checkWin()) {
+                    stats.innerHTML = 'Congratulations!, Player O wins';
+                    counter = 0;
+                }
+                else if (counter === 8) {
+                    stats.innerHTML = "It's a tie!";
+                    counter = 0;
+                }
+                counter++;
+
+                break;
+            }
         }
-        if (checkWin()) {
-            stats.innerHTML = 'Congratulations!, Player O wins';
-            counter = 0;
-        }
-        else if (counter === 8) {
-            stats.innerHTML = "It's a tie!";
-            counter = 0;
-        }
-        counter++;
     }
 }
 // */
