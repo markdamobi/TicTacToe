@@ -3,64 +3,63 @@ const MAX_TURNS = 9;
 let counter = 0;
 var pos = [];
 let squares = document.getElementsByClassName('square');
-for (let i = 1; i <= MAX_TURNS; i++){
-    pos[i] = document.querySelector('#s' + i )
+for (let i = 1; i <= MAX_TURNS; i++) {
+    pos[i] = document.querySelector('#s' + i)
 }
 
-function playTurn(e){
+function playTurn(e) {
     let play = document.querySelector('#' + this.id);
-    if (counter % 2 === 0){
-        play.innerHTML = 'X';
-        counter++;
-        console.log(checkDiagonal() + 'Diagonnal');
-        console.log(checkHorizontal() + 'horizontal');
-        console.log(checkVertical() + "vertical");
+    //Check if the position has already been played first
+    if (play.innerHTML === '') {
+        if (counter % 2 === 0) {
+            play.innerHTML = 'X';
+            counter++;
 
-    }
-    else if (!(counter % 2 === 0)){
-        play.innerHTML = 'O';
-        counter++;
-        console.log(checkDiagonal() + 'diagonal');
-        console.log(checkHorizontal() + 'Horizontal');
-        console.log(checkVertical() + 'Vertical');
+        }
+        else if (!(counter % 2 === 0)) {
+            play.innerHTML = 'O';
+            counter++;
+
+        }
+
     }
 }
 //Function that resets the board 
-function clearBoard(){
-    for (let i = 0; i < squares.length; i++){
+function clearBoard() {
+    for (let i = 0; i < squares.length; i++) {
         squares[i].innerHTML = '';
     }
     //Reset counter 
     counter = 0;
 }
-function checkWin(){
+function checkWin() {
     return (checkHorizontal() || checkVertical() || checkDiagonal());
 }
-function checker(a,b,c){
+function checker(a, b, c) {
     return (a !== '') && (a === b) && (b === c);
 
 }
-function checkHorizontal(){
-    return (checker(pos[1].innerHTML,pos[2].innerHTML,pos[3].innerHTML) ||
-            checker(pos[4].innerHTML,pos[5].innerHTML,pos[6].innerHTML)||
-            checker(pos[7].innerHTML,pos[8].innerHTML,pos[9].innerHTML)
+function checkHorizontal() {
+    return (checker(pos[1].innerHTML, pos[2].innerHTML, pos[3].innerHTML) ||
+        checker(pos[4].innerHTML, pos[5].innerHTML, pos[6].innerHTML) ||
+        checker(pos[7].innerHTML, pos[8].innerHTML, pos[9].innerHTML)
     )
 }
 
-function checkVertical(){
-    return (checker(pos[1].innerHTML,pos[4].innerHTML,pos[7].innerHTML) ||
-            checker(pos[2].innerHTML,pos[5].innerHTML,pos[8].innerHTML)||
-            checker(pos[3].innerHTML,pos[6].innerHTML,pos[9].innerHTML)
+function checkVertical() {
+    return (checker(pos[1].innerHTML, pos[4].innerHTML, pos[7].innerHTML) ||
+        checker(pos[2].innerHTML, pos[5].innerHTML, pos[8].innerHTML) ||
+        checker(pos[3].innerHTML, pos[6].innerHTML, pos[9].innerHTML)
     )
 }
-function checkDiagonal(){
-    return (checker(pos[1].innerHTML,pos[5].innerHTML,pos[9].innerHTML) ||
-            checker(pos[3].innerHTML,pos[5].innerHTML,pos[7].innerHTML)
+function checkDiagonal() {
+    return (checker(pos[1].innerHTML, pos[5].innerHTML, pos[9].innerHTML) ||
+        checker(pos[3].innerHTML, pos[5].innerHTML, pos[7].innerHTML)
     )
 }
 
 //Add event listener to each of the squares
 for (let i = 0; i < squares.length; i++) {
-        squares[i].addEventListener('click', playTurn);
-    
+    squares[i].addEventListener('click', playTurn);
+
 }
