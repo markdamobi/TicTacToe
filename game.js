@@ -1,16 +1,19 @@
 const MAX_TURNS = 9;
-var squares = document.getElementsByClassName('square')
-function playTurnX(e) {
-    var play = document.querySelector('#'+ this.id);
-    console.log(this.id);
-    play.innerHTML = 'X';
-    // var input = document.querySelector('this.id')
-}
-function playTurnO(e) {
-    var play = document.querySelector('#'+ this.id);
-    console.log(this.id);
-    play.innerHTML ='O';
-    // var input = document.querySelector('this.id')
+//Counter to keep track of times played, so that it switches from x, and o
+let counter = 0;
+let squares = document.getElementsByClassName('square')
+
+function playTurn(e){
+    let play = document.querySelector('#' + this.id);
+    if (counter % 2 === 0){
+        play.innerHTML = 'X';
+        counter++;
+
+    }
+    else if (counter % 2 !== 0){
+        play.innerHTML = 'X';
+        counter++;
+    }
 }
 //Function that resets the board 
 function clearBoard(){
@@ -23,11 +26,6 @@ function checker(a,b,c){
 }
 //Add event listener to each of the squares
 for (let i = 0; i < squares.length; i++) {
-    if (i % 2 == 0){
-        squares[i].addEventListener('click', playTurnX);
-    }
-    else{
-        squares[i].addEventListener('click', playTurnO);
-    }
+        squares[i].addEventListener('click', playTurn);
     
 }
