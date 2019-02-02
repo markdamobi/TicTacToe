@@ -118,7 +118,7 @@ function clearBoard() {
     //Reset counter 
     counter = 0;
     //Set status back to empty
-    stats.innerHTML = '';
+    stats.innerHTML = 'Play First';
     diag1[0].classList.remove('strikediag');
     diag1[1].classList.remove('strikediag');
     diag1[2].classList.remove('strikediag');
