@@ -66,6 +66,7 @@ function playAi(e) {
         setTimeout(AiTurn,500);
     }
 }
+//This function will make the AI play. The AI always goes second. 
 function AiTurn() {
     if (counter % 2 !== 0) {
         for (let i = 1; i < MAX_TURNS; i++) {
