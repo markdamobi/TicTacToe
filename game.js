@@ -22,7 +22,14 @@ function clearBoard(){
     }
 }
 function checker(a,b,c){
-    
+    return (a === b) && (b === c);
+
+}
+function checkHorizontal(){
+    return (checker(pos[1],pos[2],pos[3]) ||
+            checker(pos[4],pos[5],pos[6])||
+            checker(pos[7],pos[8],pos[9])
+    )
 }
 //Add event listener to each of the squares
 for (let i = 0; i < squares.length; i++) {
