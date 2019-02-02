@@ -2,7 +2,9 @@ const MAX_TURNS = 9;
 //Counter to keep track of times played, so that it switches from x, and o
 let counter = 0;
 //Array that contains the position of each square 
-var pos = [];
+let pos = [];
+//FLag to check if game has ended; 
+let isOver = false;
 let stats = document.querySelector('#status');
 let squares = document.getElementsByClassName('square');
 for (let i = 1; i <= MAX_TURNS; i++) {
@@ -55,15 +57,22 @@ function playAi(e) {
             stats.innerHTML = "Player O's turn";
             if (checkWin()) {
                 stats.innerHTML = 'Congratulations!, Player X wins';
+                isOver = true;
                 counter = 0;
             }
             else if (counter === 8) {
                 stats.innerHTML = "It's a tie!";
+                isOver = true;
                 counter = 0;
             }
             counter++;
+            // setTimeout(AiTurn,500);
         }
+        //Check if game is over before AI plays 
+        if (!isOver){
         setTimeout(AiTurn,500);
+
+        }
     }
 }
 //This function will make the AI play. The AI always goes second. 
@@ -75,10 +84,12 @@ function AiTurn() {
                 stats.innerHTML = "Player X's turn";
                 if (checkWin()) {
                     stats.innerHTML = 'Congratulations!, Player O wins';
+                    isOver = true;
                     counter = 0;
                 }
                 else if (counter === 8) {
                     stats.innerHTML = "It's a tie!";
+                    isOver = true;
                     counter = 0;
                 }
                 counter++;
@@ -100,6 +111,8 @@ function clearBoard() {
     counter = 0;
     //Set status back to empty
     stats.innerHTML = '';
+    //Reset isOver back to false
+    isOver = false;
 }
 function checkWin() {
     return (checkHorizontal() || checkVertical() || checkDiagonal());
