@@ -3,6 +3,10 @@ const MAX_TURNS = 9;
 let counter = 0;
 //Array that contains the position of each square 
 let pos = [];
+
+const sp = ["bottom", "right", "left top", "right top"];
+const strikes = {123: sp[0], 456: sp[0], 789: sp[0], 147: sp[1], 258: sp[1], 369: sp[1], 357: sp[2], 159: sp[3] };
+
 //FLag to check if game has ended; 
 let isOver = false;
 let stats = document.querySelector('#status');
@@ -59,15 +63,17 @@ function playAi(e) {
         if (counter % 2 === 0) {
             play.innerHTML = 'X';
             stats.innerHTML = "Player O's turn";
-            if (checkWin()) {
+            let win = checkWin()
+            if (win) {
                 stats.innerHTML = 'Congratulations!, Player X wins';
                 isOver = true;
                 counter = 0;
-                if (checker(diag1[0].innerHTML,diag1[1].innerHTML,diag1[2].innerHTML)){
-                    diag1[0].classList.add('strikediag');
-                    diag1[1].classList.add('strikediag');
-                    diag1[2].classList.add('strikediag');
-                }
+                strikeIt(win);
+                // if (checker(diag1[0].innerHTML,diag1[1].innerHTML,diag1[2].innerHTML)){
+                //     diag1[0].classList.add('strikediag');
+                //     diag1[1].classList.add('strikediag');
+                //     diag1[2].classList.add('strikediag');
+                // }
             }
             else if (counter === 8) {
                 stats.innerHTML = "It's a tie!";
@@ -114,14 +120,15 @@ function AiTurn() {
 function clearBoard() {
     for (let i = 0; i < squares.length; i++) {
         squares[i].innerHTML = '';
+        $(squares[i]).css("background", "");
     }
     //Reset counter 
     counter = 0;
     //Set status back to empty
-    stats.innerHTML = '';
-    diag1[0].classList.remove('strikediag');
-    diag1[1].classList.remove('strikediag');
-    diag1[2].classList.remove('strikediag');
+    stats.innerHTML = 'Start Game';
+    // diag1[0].classList.remove('strikediag');
+    // diag1[1].classList.remove('strikediag');
+    // diag1[2].classList.remove('strikediag');
     //Reset isOver back to false
     isOver = false;
 }
@@ -133,26 +140,65 @@ function checker(a, b, c) {
 
 }
 function checkHorizontal() {
-    return (checker(pos[1].innerHTML, pos[2].innerHTML, pos[3].innerHTML) ||
-        checker(pos[4].innerHTML, pos[5].innerHTML, pos[6].innerHTML) ||
-        checker(pos[7].innerHTML, pos[8].innerHTML, pos[9].innerHTML)
-    )
+    let result = "";
+    if(checker(pos[1].innerHTML, pos[2].innerHTML, pos[3].innerHTML))
+        result = "123";
+    if(checker(pos[4].innerHTML, pos[5].innerHTML, pos[6].innerHTML))
+        result = "456";    
+    if(checker(pos[7].innerHTML, pos[8].innerHTML, pos[9].innerHTML))
+        result = "789";
+    return result;
+    // return (checker(pos[1].innerHTML, pos[2].innerHTML, pos[3].innerHTML) ||
+    //     checker(pos[4].innerHTML, pos[5].innerHTML, pos[6].innerHTML) ||
+    //     checker(pos[7].innerHTML, pos[8].innerHTML, pos[9].innerHTML)
+    // )
+
+
 }
 
 function checkVertical() {
-    return (checker(pos[1].innerHTML, pos[4].innerHTML, pos[7].innerHTML) ||
-        checker(pos[2].innerHTML, pos[5].innerHTML, pos[8].innerHTML) ||
-        checker(pos[3].innerHTML, pos[6].innerHTML, pos[9].innerHTML)
-    )
+    let result = "";
+    if(checker(pos[1].innerHTML, pos[4].innerHTML, pos[7].innerHTML))
+        result = "147";
+    if(checker(pos[2].innerHTML, pos[5].innerHTML, pos[8].innerHTML))
+        result = "258";    
+    if(checker(pos[3].innerHTML, pos[6].innerHTML, pos[9].innerHTML))
+        result = "369";
+    return result;
+
+    // return (checker(pos[1].innerHTML, pos[4].innerHTML, pos[7].innerHTML) ||
+    //     checker(pos[2].innerHTML, pos[5].innerHTML, pos[8].innerHTML) ||
+    //     checker(pos[3].innerHTML, pos[6].innerHTML, pos[9].innerHTML)
+    // )
 }
 function checkDiagonal() {
-    return (checker(pos[1].innerHTML, pos[5].innerHTML, pos[9].innerHTML) ||
-        checker(pos[3].innerHTML, pos[5].innerHTML, pos[7].innerHTML)
-    )
+    let result = "";
+    if(checker(pos[1].innerHTML, pos[5].innerHTML, pos[9].innerHTML))
+        result = "159";
+    if(checker(pos[3].innerHTML, pos[5].innerHTML, pos[7].innerHTML))
+        result = "357";    
+    return result;
+
+    // return (checker(pos[1].innerHTML, pos[5].innerHTML, pos[9].innerHTML) ||
+    //     checker(pos[3].innerHTML, pos[5].innerHTML, pos[7].innerHTML)
+    // )
+}
+
+function getStrike(str){
+    return "linear-gradient(to "+str+", transparent 47.75%, currentColor 49.5%, currentColor 50.5%, transparent 52.25%)"
+}
+
+function strikeIt(cellsStr){
+    let strike = strikes[cellsStr];
+    cells = cellsStr.split("");
+    for(let i =0; i<3; i++){
+        $("#s" + cells[i]).css("background", getStrike(strike));
+    }
 }
 
 //Add event listener to each of the squares
 for (let i = 0; i < squares.length; i++) {
     squares[i].addEventListener('click', playAi);
+    $(squares[i]).addClass("strikeIt");
 
 }
