@@ -12,19 +12,17 @@ function playTurn(e){
     if (counter % 2 === 0){
         play.innerHTML = 'X';
         counter++;
-        console.log(checkWin());
-        console.log(checkDiagonal());
-        console.log(checkHorizontal());
-        console.log(checkVertical());
+        console.log(checkDiagonal() + 'Diagonnal');
+        console.log(checkHorizontal() + 'horizontal');
+        console.log(checkVertical() + "vertical");
 
     }
-    else if (counter % 2 !== 0){
+    else if (!(counter % 2 === 0)){
         play.innerHTML = 'O';
         counter++;
-        console.log(checkWin());
-        console.log(checkDiagonal());
-        console.log(checkHorizontal());
-        console.log(checkVertical());
+        console.log(checkDiagonal() + 'diagonal');
+        console.log(checkHorizontal() + 'Horizontal');
+        console.log(checkVertical() + 'Vertical');
     }
 }
 //Function that resets the board 
@@ -32,6 +30,8 @@ function clearBoard(){
     for (let i = 0; i < squares.length; i++){
         squares[i].innerHTML = '';
     }
+    //Reset counter 
+    counter = 0;
 }
 function checkWin(){
     return (checkHorizontal() || checkVertical() || checkDiagonal());
